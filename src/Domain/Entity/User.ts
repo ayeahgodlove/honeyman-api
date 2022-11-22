@@ -1,5 +1,5 @@
 export interface User {
-    id: string;
+    id: number;
     username: string;
     fullname: string;
     email: string;
@@ -8,4 +8,5 @@ export interface User {
     role: string;
     createdAt: Date;
     updatedAt: Date;
+    deletedAt: Date;
 }
