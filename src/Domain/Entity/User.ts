@@ -10,3 +10,16 @@ export interface User {
     updatedAt: Date;
     deletedAt: Date;
 }
+
+export const emptyUser: User = {
+    id: 0,
+    username: "",
+    fullname: "",
+    email: "",
+    password: "",
+    address: "",
+    role: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: new Date()
+}
