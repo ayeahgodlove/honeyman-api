@@ -12,11 +12,11 @@ export const CategoryTable = (sequelize: Sequelize): any => {
         primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       slug: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       createdAt: {

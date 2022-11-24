@@ -16,7 +16,7 @@ export const ProductTable = (sequelize: Sequelize) => {
         primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       price: {
@@ -44,7 +44,7 @@ export const ProductTable = (sequelize: Sequelize) => {
         },
       },
       imagePath: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: true,
       },
       createdAt: {

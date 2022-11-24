@@ -1,3 +1,5 @@
+import { IBaseResponse } from "./BaseResponse";
+
 export interface Category {
   id: number;
   name: string;
@@ -18,7 +20,16 @@ export const emptyCategory: Category = {
   updatedAt: new Date(),
 };
 
+export interface ICategoryResponse extends IBaseResponse {
+  data: Category;
+}
+
+
 export const emptySubCategory: SubCategory = {
   ...emptyCategory,
   categoryId: 0,
 };
+export interface ISubCategoryResponse extends IBaseResponse {
+  data: SubCategory;
+}
+

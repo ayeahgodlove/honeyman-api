@@ -1,3 +1,5 @@
+import { IBaseResponse } from "./BaseResponse";
+
 export interface Order {
     id: number;
     userId: number;
@@ -21,3 +23,8 @@ export const emptyOrder: Order = {
     createdAt: new Date(),
     updatedAt: new Date(),
 }
+
+export interface IOrderResponse extends IBaseResponse {
+    data: Order;
+  }
+  

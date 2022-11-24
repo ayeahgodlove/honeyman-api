@@ -37,11 +37,11 @@ export const OrderTable = (sequelize: Sequelize) => {
         allowNull: false,
       },
       status: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(10),
         allowNull: false,
       },
       orderNo: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(40),
         allowNull: false,
       },
       createdAt: {

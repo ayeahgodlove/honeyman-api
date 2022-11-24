@@ -12,11 +12,11 @@ export const SubCategoryTable = (sequelize: Sequelize) => {
         primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       slug: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       categoryId: {

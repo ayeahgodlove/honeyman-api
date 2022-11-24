@@ -12,27 +12,27 @@ export const UserTable = (sequelize: Sequelize) => {
         primaryKey: true,
       },
       username: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       fullname: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       password: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       address: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: true,
       },
       role: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(10),
         allowNull: true,
       },
       createdAt: {

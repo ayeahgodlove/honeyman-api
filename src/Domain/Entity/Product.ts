@@ -1,3 +1,5 @@
+import { IBaseResponse } from "./BaseResponse";
+
 export interface Product {
     id: number;
     name: string;
@@ -21,3 +23,8 @@ export const emptyProduct: Product= {
     createdAt: new Date(),
     updatedAt: new Date(),
 }
+
+export interface IProductResponse extends IBaseResponse {
+    data: Product;
+  }
+  

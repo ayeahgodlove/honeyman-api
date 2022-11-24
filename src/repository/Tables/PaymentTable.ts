@@ -24,7 +24,7 @@ export const PaymentTable = (sequelize: Sequelize) => {
         }
       },
       orderNo: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(40),
         allowNull: false,
         references: {
           model: "users",
@@ -36,7 +36,7 @@ export const PaymentTable = (sequelize: Sequelize) => {
         allowNull: false,
       },
       status: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(10),
         allowNull: false,
       },
       createdAt: {

@@ -1,3 +1,5 @@
+import { IBaseResponse } from "./BaseResponse";
+
 export interface Payment {
     id: string;
     userId: number;
@@ -17,3 +19,8 @@ export const emptyPayment: Payment = {
     createdAt: new Date(),
     updatedAt: new Date(),
 }
+
+export interface IPaymentResponse extends IBaseResponse {
+    data: Payment;
+  }
+  
