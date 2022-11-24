@@ -8,7 +8,6 @@ export interface Order {
     orderNo: string;
     createdAt: Date;
     updatedAt: Date;
-    deletedAt: Date;
 }
 
 export const emptyOrder: Order = {
@@ -21,5 +20,4 @@ export const emptyOrder: Order = {
     orderNo: "",
     createdAt: new Date(),
     updatedAt: new Date(),
-    deletedAt: new Date()
 }

@@ -4,7 +4,6 @@ export interface Category {
   slug: string;
   createdAt: Date;
   updatedAt: Date;
-  deletedAt: Date;
 }
 
 export interface SubCategory extends Category {
@@ -17,7 +16,6 @@ export const emptyCategory: Category = {
   slug: "",
   createdAt: new Date(),
   updatedAt: new Date(),
-  deletedAt: new Date(),
 };
 
 export const emptySubCategory: SubCategory = {

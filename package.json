@@ -18,7 +18,9 @@
     "express-jwt-authz": "^2.4.1",
     "express-openid-connect": "^2.10.0",
     "helmet": "^6.0.0",
-    "jwks-rsa": "^3.0.0"
+    "jwks-rsa": "^3.0.0",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.8"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
@@ -27,6 +29,7 @@
     "@types/express-jwt": "^7.4.2",
     "@types/helmet": "^4.0.0",
     "@types/node": "^18.11.9",
+    "sequelize-cli": "^6.5.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.3"
   }

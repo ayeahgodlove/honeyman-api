@@ -8,7 +8,6 @@ export interface User {
     role: string;
     createdAt: Date;
     updatedAt: Date;
-    deletedAt: Date;
 }
 
 export const emptyUser: User = {
@@ -21,5 +20,4 @@ export const emptyUser: User = {
     role: "",
     createdAt: new Date(),
     updatedAt: new Date(),
-    deletedAt: new Date()
 }

@@ -10,6 +10,7 @@ import bodyParser from "body-parser";
 import { errorHandler } from "./middlewares/error.middleware";
 import { notFoundHandler } from "./middlewares/not-found.middleware";
 import { checkJwt } from "./middlewares/authz.middleware";
+import { MySQLConnection } from "./config/MySQLConfig";
 
 dotenv.config();
 
@@ -39,6 +40,9 @@ app.use(
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+// initialize DB connection
+MySQLConnection();
 
 // app.use(jwtCheck); //donot authorize the whole application
 

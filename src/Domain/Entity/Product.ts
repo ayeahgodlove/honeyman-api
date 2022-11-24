@@ -8,7 +8,6 @@ export interface Product {
     imagePath: string;	
     createdAt: Date;
     updatedAt: Date;
-    deletedAt: Date;
 }
 
 export const emptyProduct: Product= {
@@ -21,5 +20,4 @@ export const emptyProduct: Product= {
     imagePath: "",
     createdAt: new Date(),
     updatedAt: new Date(),
-    deletedAt: new Date()
 }

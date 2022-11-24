@@ -6,7 +6,6 @@ export interface Payment {
     status: string;
     createdAt: Date;
     updatedAt: Date;
-    deletedAt: Date;
 }
 
 export const emptyPayment: Payment = {
@@ -17,5 +16,4 @@ export const emptyPayment: Payment = {
     status: "",
     createdAt: new Date(),
     updatedAt: new Date(),
-    deletedAt: new Date()
 }
