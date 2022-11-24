@@ -43,13 +43,13 @@ app.use(express.json());
 // app.use(jwtCheck); //donot authorize the whole application
 
 //routes
-app.get("/api/v1", (req: Request, res: Response) => {
+app.get("/api", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
 // ✨ New! Mount authorization middleware
 // app.use(checkJwt);
-app.get("/api/v1/authorized", checkJwt, function (req, res) {
+app.get("/api/authorized", checkJwt, function (req, res) {
   res.send({
     message: "Secured Resource",
     access_token: req.headers.authorization,
