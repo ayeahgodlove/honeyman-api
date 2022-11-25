@@ -1,5 +1,5 @@
 import { mySQLSequelize } from "../config/MySQLConfig";
-import { CategoryTable } from "../repository/Tables/CategoryTable";
+import { CategoryModel } from "../repository/Models/CategoryModel";
 import * as express from "express";
 import asyncHandler from "express-async-handler";
 import {
@@ -8,16 +8,16 @@ import {
   ICategoryResponse,
 } from "../Domain/Entity/Category";
 import slugify from "slugify";
-const _operation = CategoryTable(mySQLSequelize);
+const _operation = CategoryModel(mySQLSequelize);
 
-const getCategories = asyncHandler(async (req, res) => {
+const getCategories: express.RequestHandler = asyncHandler(async (req, res) => {
   const categories: Category[] = await _operation.findAll();
   res.status(200).json(categories);
 });
 
-const createCategory = asyncHandler<Category>(
+const createCategory:  express.RequestHandler = asyncHandler(
   async (
-    req: express.Request<Category>,
+    req: express.Request,
     res: express.Response<ICategoryResponse>
   ) => {
     const { name, slug, createdAt } = req.body;
