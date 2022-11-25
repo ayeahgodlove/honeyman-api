@@ -1,5 +1,4 @@
 import { mySQLSequelize } from "../config/MySQLConfig";
-import { CategoryModel } from "../repository/Models/CategoryModel";
 import * as express from "express";
 import asyncHandler from "express-async-handler";
 import {
@@ -8,7 +7,8 @@ import {
   ICategoryResponse,
 } from "../Domain/Entity/Category";
 import slugify from "slugify";
-const _operation = CategoryModel(mySQLSequelize);
+import { CategoryTable } from "../repository/Table/CategoryTable";
+const _operation = CategoryTable(mySQLSequelize);
 
 const getCategories: express.RequestHandler = asyncHandler(async (req, res) => {
   const categories: Category[] = await _operation.findAll();

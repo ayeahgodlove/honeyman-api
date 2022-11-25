@@ -1,8 +1,8 @@
-import { DataTypes } from "sequelize";
-import { mySQLSequelize } from "../../config/MySQLConfig";
+import { DataTypes, Sequelize } from "sequelize";
 import { ICategory } from "../Contracts/ICategory";
 
- export const CategoryTable = mySQLSequelize.define<ICategory>(
+export const CategoryTable = (sequelize: Sequelize) => {
+  const Category = sequelize.define<ICategory>(
     "categories",
     {
       id: {
@@ -33,3 +33,6 @@ import { ICategory } from "../Contracts/ICategory";
       timestamps: true,
     }
   );
+
+  return Category;
+};
