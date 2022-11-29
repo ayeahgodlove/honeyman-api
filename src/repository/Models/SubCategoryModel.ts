@@ -16,19 +16,10 @@ import { CategoryModel } from "./CategoryModel";
 })
 export class SubCategoryModel extends Model<SubCategoryModel> {
   @Column({
-    type: DataType.NUMBER,
-    unique: true,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  })
-  id!: number;
-
-  @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     allowNull: false,
     references: {
-      model: "Category",
+      model: CategoryModel,
       key: "id",
     },
   })
@@ -48,18 +39,6 @@ export class SubCategoryModel extends Model<SubCategoryModel> {
     unique: true,
   })
   slug!: string;
-
-  @Column({
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  })
-  createdAt!: Date;
-
-  @Column({
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  })
-  updatedAt!: Date;
 
   @BelongsTo(() => CategoryModel)
   category!: CategoryModel;

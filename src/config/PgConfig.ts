@@ -7,7 +7,7 @@
 import { Sequelize } from "sequelize";
 
 export const PgSequelize = new Sequelize(
-  "honeyman_db",
+  "honeyman_db_1",
   "postgres",
   "admin@2022",
   {

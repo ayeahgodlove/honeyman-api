@@ -10,7 +10,7 @@ import bodyParser from "body-parser";
 import { errorHandler } from "./middlewares/error.middleware";
 import { notFoundHandler } from "./middlewares/not-found.middleware";
 import { checkJwt } from "./middlewares/authz.middleware";
-import { MySQLConnection } from "./config/MySQLConfig";
+// import { MySQLConnection } from "./config/MySQLConfig";
 import categoriesRouter from "./Routes/CategoryRoutes";
 import { PgConnection } from "./config/PgConfig";
 dotenv.config();
@@ -63,7 +63,7 @@ app.get("/api/authorized", checkJwt, function (req, res) {
 });
 
 // routes
-// app.use("/api/categories", categoriesRouter);
+app.use("/api/categories", categoriesRouter);
 // middleware interceptions
 app.use(errorHandler);
 app.use(notFoundHandler);

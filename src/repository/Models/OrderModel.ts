@@ -16,19 +16,10 @@ import { UserModel } from "./UserModel";
 })
 export class OrderModel extends Model<OrderModel> {
   @Column({
-    type: DataType.NUMBER,
-    unique: true,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  })
-  id!: number;
-
-  @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     allowNull: false,
     references: {
-      model: "User",
+      model: UserModel,
       key: "id",
     },
   })
@@ -36,10 +27,10 @@ export class OrderModel extends Model<OrderModel> {
   userId!: number;
 
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     allowNull: false,
     references: {
-      model: "Product",
+      model: ProductModel,
       key: "id",
     },
   })
@@ -78,85 +69,9 @@ export class OrderModel extends Model<OrderModel> {
   })
   slug!: string;
 
-  @Column({
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  })
-  createdAt!: Date;
-
-  @Column({
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  })
-  updatedAt!: Date;
-
   @BelongsTo(() => UserModel)
   user!: UserModel;
 
   @BelongsTo(() => ProductModel)
   product!: ProductModel;
 }
-
-
-
-
-// import { DataTypes } from "sequelize";
-// import { IOrder } from "../Contracts/IOrder";
-// import { mySQLSequelize } from "../../config/MySQLConfig";
-
-// export const OrderModel = mySQLSequelize.define<IOrder>(
-//   "orders",
-//   {
-//     id: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//       autoIncrement: true,
-//       primaryKey: true,
-//     },
-//     userId: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//       references: {
-//         model: "users",
-//         key: "id",
-//       },
-//     },
-
-//     productId: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//       references: {
-//         model: "products",
-//         key: "id",
-//       },
-//     },
-//     unitPrice: {
-//       type: DataTypes.FLOAT,
-//       allowNull: false,
-//     },
-//     total: {
-//       type: DataTypes.FLOAT,
-//       allowNull: false,
-//     },
-//     status: {
-//       type: DataTypes.STRING(10),
-//       allowNull: false,
-//     },
-//     orderNo: {
-//       type: DataTypes.STRING(40),
-//       allowNull: false,
-//     },
-//     createdAt: {
-//       type: DataTypes.DATE,
-//       defaultValue: DataTypes.NOW,
-//     },
-//     updatedAt: {
-//       type: DataTypes.DATE,
-//       allowNull: false,
-//     },
-//   },
-//   {
-//     paranoid: true,
-//     timestamps: true,
-//   }
-// );

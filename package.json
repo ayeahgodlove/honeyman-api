@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
-    "db:create": "npx sequelize-cli db:create",
-    "migrate:up": "npx sequelize-cli db:migrate",
-    "migrate:undo": "npx sequelize-cli db:migrate:undo",
-    "build:migration": "ts-node -T -r ./migration-builder.ts"
+    "db:create": "sequelize-cli db:create",
+    "migrate:up": "sequelize-cli db:migrate",
+    "migrate:undo": "sequelize-cli db:migrate:undo",
+    "practice": "ts-node -T -r tsconfig-paths/register ./migration-builder.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,6 @@
     "express-jwt": "^7.7.7",
     "express-jwt-authz": "^2.4.1",
     "express-openid-connect": "^2.10.0",
-    "helmet": "^6.0.0",
     "jwks-rsa": "^3.0.0",
     "mysql2": "^2.3.3",
     "pg": "^8.8.0",
@@ -30,6 +29,7 @@
     "sequelize": "^6.25.8",
     "sequelize-typescript-migration-lts": "^3.2.3",
     "slugify": "^1.6.5",
+    "tsconfig-paths": "^4.1.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

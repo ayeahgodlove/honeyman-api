@@ -11,14 +11,6 @@ import {
   modelName: "Category"
 })
 export class CategoryModel extends Model<CategoryModel> {
-  @Column({
-    type: DataType.NUMBER,
-    unique: true,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  })
-  id!: number;
 
   @Column({
     type: DataType.STRING(128),
@@ -33,16 +25,4 @@ export class CategoryModel extends Model<CategoryModel> {
     unique: true
   })
   slug!: string;
-
-  @Column({
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  })
-  createdAt!: Date;
-
-  @Column({
-    type: DataType.DATE,
-    defaultValue: DataType.NOW,
-  })
-  updatedAt!: Date;
 }

@@ -7,14 +7,19 @@
 import { Sequelize } from "sequelize";
 
 export const mySQLSequelize = new Sequelize(
-  "honeyman-db",
+  "migration_db",
   "root",
   "",
   {
     dialect: "mysql",
+    dialectOptions: {
+      // Your mysql2 options here
+      charset: "utf8mb4_general_ci", 
+      multipleStatements: true
+    },
     host: "localhost",
     define: {
-      timestamps: false,
+      timestamps: true,
     },
     pool: {
       max: 5,

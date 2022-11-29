@@ -3,9 +3,9 @@
     "username": "postgres",
     "password": "admin@2022",
     "database": "honeyman_db",
-    "Port": 5432,
     "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "port": 5432
   },
   "test": {
     "username": "root",

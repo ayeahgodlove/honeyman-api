@@ -12,15 +12,6 @@ import {
 })
 export class UserModel extends Model<UserModel> {
   @Column({
-    type: DataTypes.NUMBER,
-    unique: true,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  })
-  id!: number;
-
-  @Column({
     type: DataTypes.STRING(128),
     allowNull: false,
     unique: true
@@ -66,16 +57,4 @@ export class UserModel extends Model<UserModel> {
     unique: true
   })
   slug!: string;
-
-  @Column({
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  })
-  createdAt!: Date;
-
-  @Column({
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  })
-  updatedAt!: Date;
 }

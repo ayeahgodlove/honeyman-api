@@ -11,7 +11,6 @@ import { PaymentModel } from "./src/repository/Models/PaymentModel";
 
 import { SequelizeTypescriptMigration } from "sequelize-typescript-migration-lts";
 
-
 dotenv.config();
 
 const bootstrap = async () => {
@@ -25,21 +24,27 @@ const bootstrap = async () => {
     models: [
       CategoryModel,
       SubCategoryModel,
-      ProductModel,
       UserModel,
+      ProductModel,
       OrderModel,
       PaymentModel,
     ],
-    logging: false,
+    logging: true,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
   });
   try {
     const result = await SequelizeTypescriptMigration.makeMigration(sequelize, {
       outDir: join(__dirname, "./db/migrations"),
-      migrationName: "first_main_migration",
+      migrationName: "init",
       debug: true,
-      preview: true,
+      preview: false,
     });
-    console.log("result: ", result);
+    console.log("result: ", result.msg);
   } catch (e) {
     console.log("error: ", e);
   }
