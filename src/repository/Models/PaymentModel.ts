@@ -4,7 +4,7 @@ import {
   Column,
   ForeignKey,
   BelongsTo,
-  DataType
+  DataType,
 } from "sequelize-typescript";
 import { UserModel } from "./UserModel";
 
@@ -14,6 +14,14 @@ import { UserModel } from "./UserModel";
   modelName: "Payment",
 })
 export class PaymentModel extends Model<PaymentModel> {
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  declare id?: number;
+
   @Column({
     type: DataType.INTEGER,
     allowNull: false,

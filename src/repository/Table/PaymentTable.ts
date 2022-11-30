@@ -3,7 +3,7 @@ import { DataTypes, Sequelize } from "sequelize";
 
 export const PaymentTable = (sequelize: Sequelize) => {
   const Payment = sequelize.define<IPayment>(
-    "payments",
+    "Payments",
     {
       id: {
         type: DataTypes.INTEGER,

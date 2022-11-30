@@ -3,7 +3,7 @@ import { IOrder } from "../Contracts/IOrder";
 
 export const OrderTable = (sequelize: Sequelize) => {
   const Order = sequelize.define<IOrder>(
-    "orders",
+    "Orders",
     {
       id: {
         type: DataTypes.INTEGER,

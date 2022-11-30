@@ -2,12 +2,12 @@ import { Sequelize } from "sequelize-typescript";
 import { join } from "path";
 import dotenv from "dotenv";
 
-import { CategoryModel } from "./src/repository/Models/CategoryModel";
-import { SubCategoryModel } from "./src/repository/Models/SubCategoryModel";
-import { UserModel } from "./src/repository/Models/UserModel";
-import { ProductModel } from "./src/repository/Models/ProductModel";
-import { OrderModel } from "./src/repository/Models/OrderModel";
-import { PaymentModel } from "./src/repository/Models/PaymentModel";
+import { CategoryModel } from "./src/Repository/Models/CategoryModel";
+import { SubCategoryModel } from "./src/Repository/Models/SubCategoryModel";
+import { UserModel } from "./src/Repository/Models/UserModel";
+import { ProductModel } from "./src/Repository/Models/ProductModel";
+import { OrderModel } from "./src/Repository/Models/OrderModel";
+import { PaymentModel } from "./src/Repository/Models/PaymentModel";
 
 import { SequelizeTypescriptMigration } from "sequelize-typescript-migration-lts";
 
@@ -21,6 +21,7 @@ const bootstrap = async () => {
     port: 5432,
     host: "localhost",
     dialect: "postgres",
+    repositoryMode: true,
     models: [
       CategoryModel,
       SubCategoryModel,
@@ -40,7 +41,7 @@ const bootstrap = async () => {
   try {
     const result = await SequelizeTypescriptMigration.makeMigration(sequelize, {
       outDir: join(__dirname, "./db/migrations"),
-      migrationName: "init",
+      migrationName: "init-migrations",
       debug: true,
       preview: false,
     });

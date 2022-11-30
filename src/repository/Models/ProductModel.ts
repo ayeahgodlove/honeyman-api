@@ -4,9 +4,12 @@ import {
   Column,
   ForeignKey,
   BelongsTo,
-  DataType
+  DataType,
+  BelongsToMany
 } from "sequelize-typescript";
 import { CategoryModel } from "./CategoryModel";
+import { OrderModel } from "./OrderModel";
+import { ProductOrderModel } from "./ProductOrderModel";
 import { SubCategoryModel } from "./SubCategoryModel";
 
 @Table({
@@ -15,6 +18,14 @@ import { SubCategoryModel } from "./SubCategoryModel";
   modelName: "Product",
 })
 export class ProductModel extends Model<ProductModel> {
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  declare id?: number;
+
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
@@ -76,4 +87,7 @@ export class ProductModel extends Model<ProductModel> {
 
   @BelongsTo(() => SubCategoryModel)
   subCategory!: SubCategoryModel;
+
+  @BelongsToMany(() => OrderModel, () => ProductOrderModel)
+  orders!: OrderModel[];
 }

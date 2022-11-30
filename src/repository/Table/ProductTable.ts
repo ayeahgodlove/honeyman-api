@@ -3,7 +3,7 @@ import { DataTypes, Sequelize } from "sequelize";
 
 export const ProductTable = (sequelize: Sequelize) => {
   const Product = sequelize.define<IProduct>(
-    "products",
+    "Products",
     {
       id: {
         type: DataTypes.INTEGER,

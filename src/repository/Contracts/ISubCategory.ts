@@ -9,6 +9,7 @@ export interface ISubCategory
   id: number;
   name: string;
   slug: string;
+  description: string;
   categoryId: ForeignKey<ICategory['id']>;
   createdAt: CreationOptional<Date>;
   updatedAt: CreationOptional<Date>;

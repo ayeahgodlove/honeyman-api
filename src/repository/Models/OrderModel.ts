@@ -4,9 +4,12 @@ import {
   Column,
   ForeignKey,
   BelongsTo,
-  DataType
+  DataType,
+  BelongsToMany,
+  HasMany
 } from "sequelize-typescript";
 import { ProductModel } from "./ProductModel";
+import { ProductOrderModel } from "./ProductOrderModel";
 import { UserModel } from "./UserModel";
 
 @Table({
@@ -15,6 +18,14 @@ import { UserModel } from "./UserModel";
   modelName: "Order",
 })
 export class OrderModel extends Model<OrderModel> {
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  declare id?: number;
+
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
@@ -42,6 +53,12 @@ export class OrderModel extends Model<OrderModel> {
     allowNull: false,
   })
   unitPrice!: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  quantity!: number;
 
   @Column({
     type: DataType.FLOAT,
@@ -72,6 +89,6 @@ export class OrderModel extends Model<OrderModel> {
   @BelongsTo(() => UserModel)
   user!: UserModel;
 
-  @BelongsTo(() => ProductModel)
-  product!: ProductModel;
+  @HasMany(() => ProductModel)
+  products!: ProductModel[]
 }

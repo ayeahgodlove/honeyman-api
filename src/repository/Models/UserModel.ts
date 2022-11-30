@@ -1,8 +1,8 @@
-import { DataTypes } from "sequelize";
 import {
   Table,
   Model,
   Column,
+  DataType
 } from "sequelize-typescript";
 
 @Table({
@@ -12,47 +12,55 @@ import {
 })
 export class UserModel extends Model<UserModel> {
   @Column({
-    type: DataTypes.STRING(128),
+    type: DataType.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  declare id?: number;
+
+  @Column({
+    type: DataType.STRING(128),
     allowNull: false,
     unique: true
   })
   username!: string;
 
   @Column({
-    type: DataTypes.STRING(128),
+    type: DataType.STRING(128),
     allowNull: false,
     unique: true
   })
   fullname!: string;
 
   @Column({
-    type: DataTypes.STRING(128),
+    type: DataType.STRING(128),
     allowNull: false,
     unique: true
   })
   email!: string;
 
   @Column({
-    type: DataTypes.STRING(128),
+    type: DataType.STRING(128),
     allowNull: false,
     unique: true
   })
   password!: string;
 
   @Column({
-    type: DataTypes.STRING(128),
+    type: DataType.STRING(128),
     allowNull: false,
   })
   address!: string;
 
   @Column({
-    type: DataTypes.STRING(128),
+    type: DataType.STRING(128),
     allowNull: false,
   })
   role!: string;
   
   @Column({
-    type: DataTypes.STRING(128),
+    type: DataType.STRING(128),
     allowNull: false,
     unique: true
   })

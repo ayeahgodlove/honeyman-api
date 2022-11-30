@@ -7,12 +7,12 @@ import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 
-import { errorHandler } from "./middlewares/error.middleware";
-import { notFoundHandler } from "./middlewares/not-found.middleware";
-import { checkJwt } from "./middlewares/authz.middleware";
+import { errorHandler } from "./Middlewares/error.middleware";
+import { notFoundHandler } from "./Middlewares/not-found.middleware";
+import { checkJwt } from "./Middlewares/authz.middleware";
 // import { MySQLConnection } from "./config/MySQLConfig";
 import categoriesRouter from "./Routes/CategoryRoutes";
-import { PgConnection } from "./config/PgConfig";
+import { PgConnection } from "./Config/PgConfig";
 dotenv.config();
 
 /**

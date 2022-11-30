@@ -1,9 +1,12 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { ICategory } from "../Contracts/ICategory";
+import { PgSequelize } from "../../Config/PgConfig";
+import { SubCategoryTable } from "./SubCategory";
+import { ProductTable } from "./ProductTable";
 
 export const CategoryTable = (sequelize: Sequelize) => {
   const Category = sequelize.define<ICategory>(
-    "categories",
+    "Categories",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -17,6 +20,10 @@ export const CategoryTable = (sequelize: Sequelize) => {
       },
       slug: {
         type: DataTypes.STRING(128),
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       createdAt: {

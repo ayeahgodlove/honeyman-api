@@ -3,7 +3,7 @@ import { IUser } from "../Contracts/IUser";
 
 export const UserTable = (sequelize: Sequelize) => {
   const User = sequelize.define<IUser>(
-    "users",
+    "Users",
     {
       id: {
         type: DataTypes.INTEGER,

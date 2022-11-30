@@ -4,6 +4,7 @@ export interface Category {
   id: number;
   name: string;
   slug: string;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -16,6 +17,7 @@ export const emptyCategory: Category = {
   id: 0,
   name: "",
   slug: "",
+  description: '',
   createdAt: new Date(),
   updatedAt: new Date(),
 };

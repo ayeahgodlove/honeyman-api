@@ -1,13 +1,14 @@
-
 import {
   Table,
   Model,
   Column,
   ForeignKey,
   BelongsTo,
-  DataType
+  DataType,
+  HasMany,
 } from "sequelize-typescript";
 import { CategoryModel } from "./CategoryModel";
+import { ProductModel } from "./ProductModel";
 
 @Table({
   timestamps: true,
@@ -15,6 +16,14 @@ import { CategoryModel } from "./CategoryModel";
   modelName: "SubCategory",
 })
 export class SubCategoryModel extends Model<SubCategoryModel> {
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  declare id?: number;
+
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
@@ -40,6 +49,18 @@ export class SubCategoryModel extends Model<SubCategoryModel> {
   })
   slug!: string;
 
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false,
+  })
+  description!: string;
+
+  /**
+   * Rav4 => Cars (belongs to)
+   */
   @BelongsTo(() => CategoryModel)
   category!: CategoryModel;
+
+  @HasMany(() => ProductModel)
+  products!: ProductModel[];
 }

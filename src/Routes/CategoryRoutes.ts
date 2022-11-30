@@ -5,7 +5,7 @@ import {
   createCategory,
   getCategories,
 } from "../Controller/CategoriesController";
-import { checkJwt } from "../middlewares/authz.middleware";
+import { checkJwt } from "../Middlewares/authz.middleware";
 
 categoriesRouter.get("/", checkJwt, getCategories);
 categoriesRouter.post("/", checkJwt, createCategory);
