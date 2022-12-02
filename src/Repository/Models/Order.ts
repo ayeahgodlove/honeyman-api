@@ -12,23 +12,24 @@ import {
 import { Product } from "./Product";
 import { ProductOrder } from "./ProductOrder";
 import { User } from "./User";
+import { uuid } from "uuidv4";
 
 @Table({
   timestamps: true,
   paranoid: true,
   tableName: "Orders",
+  modelName: "Order"
 })
 export class Order extends Model {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
   })
   declare id?: string;
 
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
     references: {
       model: User,
@@ -38,16 +39,16 @@ export class Order extends Model {
   @ForeignKey(() => User)
   userId!: string;
 
-  @Column({
-    type: DataType.UUIDV4,
-    allowNull: false,
-    references: {
-      model: Product,
-      key: "id",
-    },
-  })
-  @ForeignKey(() => Product)
-  productId!: string;
+  // @Column({
+  //   type: DataType.STRING(50),
+  //   allowNull: false,
+  //   references: {
+  //     model: Product,
+  //     key: "id",
+  //   },
+  // })
+  // @ForeignKey(() => Product)
+  // productId!: string;
 
   @Column({
     type: DataType.FLOAT,
@@ -90,8 +91,8 @@ export class Order extends Model {
   @BelongsTo(() => User)
   user!: User;
 
-  @HasMany(() => Product)
-  products!: Product[]
+  // @HasMany(() => Product)
+  // products!: Product[]
 }
 
-export const orderRepository = sequelize.getRepository(Order);
+// export const orderRepository = sequelize.getRepository(Order);

@@ -86,6 +86,8 @@ app.use("/api/categories", categoriesRouter);
  * Users controllers
  */
 app.post("/api/register", register);
+
+
 // middleware interceptions
 app.use(errorHandler);
 app.use(notFoundHandler);

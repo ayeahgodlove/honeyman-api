@@ -15,10 +15,11 @@ import { Product } from "./Product";
   timestamps: true,
   paranoid: true,
   tableName: "ProductOrders",
+  modelName: "ProductOrder"
 })
 export class ProductOrder extends Model {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
     references: {
       model: Product,
@@ -29,7 +30,7 @@ export class ProductOrder extends Model {
   productId!: string;
 
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
     references: {
       model: Order,
@@ -59,4 +60,4 @@ export class ProductOrder extends Model {
   @BelongsTo(() => Order)
   order!: Order;
 }
-export const productOrderRepository = sequelize.getRepository(ProductOrder);
+// export const productOrderRepository = sequelize.getRepository(ProductOrder);

@@ -12,23 +12,24 @@ import { Category } from "./Category";
 import { Order } from "./Order";
 import { ProductOrder } from "./ProductOrder";
 import { SubCategory } from "./SubCategory";
+import { uuid } from "uuidv4";
 
 @Table({
   timestamps: true,
   paranoid: true,
   tableName: "Products",
+  modelName: "Product"
 })
 export class Product extends Model {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
   })
   declare id?: string;
 
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
     references: {
       model: Category,
@@ -39,7 +40,7 @@ export class Product extends Model {
   categoryId!: string;
 
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
     references: {
       model: SubCategory,
@@ -93,4 +94,4 @@ export class Product extends Model {
   orders!: Order[];
 }
 
-export const productRepository = sequelize.getRepository(Product);
+// export const productRepository = sequelize.getRepository(Product);

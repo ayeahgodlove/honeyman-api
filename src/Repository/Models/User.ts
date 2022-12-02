@@ -1,16 +1,15 @@
-import { sequelize } from "../../Config/connection";
 import { Table, Model, Column, DataType } from "sequelize-typescript";
 
 @Table({
   timestamps: true,
   paranoid: true,
   tableName: "Users",
+  modelName: "User"
 })
-export class User extends Model {
+export class User extends Model<User> {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
   })
   declare id?: string;
@@ -63,4 +62,4 @@ export class User extends Model {
   slug!: string;
 }
 
-export const userRepository = sequelize.getRepository(User);
+// export const userRepository = sequelize.getRepository(User);

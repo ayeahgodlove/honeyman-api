@@ -2,17 +2,18 @@ import { sequelize } from "../../Config/connection";
 import { Table, Model, Column, DataType, HasMany } from "sequelize-typescript";
 import { Product } from "./Product";
 import { SubCategory } from "./SubCategory";
+import { uuid } from "uuidv4";
 
 @Table({
   timestamps: true,
   paranoid: true,
   tableName: "Categories",
+  modelName: "Category"
 })
 export class Category extends Model {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
   })
   declare id?: string;
@@ -49,4 +50,4 @@ export class Category extends Model {
   products!: Product[];
 }
 
-export const categoryRepository = sequelize.getRepository(Category);
+// export const categoryRepository = sequelize.getRepository(Category);

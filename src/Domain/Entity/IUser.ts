@@ -1,7 +1,7 @@
 import { IBaseResponse } from "./BaseResponse";
 
 export interface IUser {
-  id: number;
+  id: string;
   username: string;
   slug: string;
   fullname: string;
@@ -14,7 +14,7 @@ export interface IUser {
 }
 
 export const emptyUser: IUser = {
-  id: 0,
+  id: "",
   username: "",
   slug: "",
   fullname: "",
@@ -27,5 +27,5 @@ export const emptyUser: IUser = {
 };
 
 export interface IUserResponse extends IBaseResponse {
-  data: IUser;
+  data: IUser | null;
 }

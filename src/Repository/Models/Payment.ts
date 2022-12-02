@@ -8,23 +8,24 @@ import {
   DataType,
 } from "sequelize-typescript";
 import { User } from "./User";
+import { uuid } from "uuidv4";
 
 @Table({
   timestamps: true,
   paranoid: true,
   tableName: "Payments",
+  modelName: "Payment"
 })
 export class Payment extends Model {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
   })
   declare id?: string;
 
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.STRING(50),
     allowNull: false,
     references: {
       model: User,
@@ -64,4 +65,4 @@ export class Payment extends Model {
   user!: User;
 }
 
-export const paymentRepository = sequelize.getRepository(Payment);
+// export const paymentRepository = sequelize.getRepository(Payment);

@@ -2,65 +2,46 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 
 import passportJWT from "passport-jwt";
-import { IUser } from "../Repository/Contracts/IUser";
-import { UserTable } from "../Repository/Table/UserTable";
-import { PgSequelize } from "@src/Config/connection";
 import slugify from "slugify";
-const _operation = UserTable(PgSequelize);
+import { User } from "../Repository/Models/User";
+
+const ExtractJWT = passportJWT.ExtractJwt;
+const LocStrategy = LocalStrategy.Strategy;
 
 passport.use(
-  "signup",
-  new LocalStrategy.Strategy(
-    { usernameField: "Email", passwordField: "Password" },
+  new LocStrategy(
+    {
+      usernameField: "Username",
+      passwordField: "Password",
+    },
     async (username, password, callback) => {
       try {
-        const user: any = await _operation.create({
-          username,
-          slug: slugify(username.toLowerCase(), "-"),
-          password,
-          fullname: "",
-          address: "",
-          email: username,
-          id: 0,
-          role: "",
-        });
-        return callback(null, user);
+        const user = await User.findOne({ where: { username } });
+
+        if (!user) {
+          return callback(null, false, { message: "User not found" });
+        }
+
+        return callback(null, user, { message: "Logged in Successfully" });
       } catch (error) {
-        callback(error);
+        return callback(error);
       }
     }
   )
 );
 
-// ...
-
 passport.use(
-  "login",
-  new LocalStrategy.Strategy(
+  new passportJWT.Strategy(
     {
-      usernameField: "email",
-      passwordField: "password",
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "honeymansecret",
     },
-    async (email, password, done) => {
+    async (jwtPayload, callback) => {
       try {
-        const user: any = await _operation.findOne(
-          {  },
-          
-        );
-
-        if (!user) {
-          return done(null, false, { message: "User not found" });
-        }
-
-        const validate = await user.isValidPassword(password);
-
-        if (!validate) {
-          return done(null, false, { message: "Wrong Password" });
-        }
-
-        return done(null, user, { message: "Logged in Successfully" });
+        const user = await User.findByPk<User>(jwtPayload._id);
+        return callback(null, user!);
       } catch (error) {
-        return done(error);
+        return callback(error);
       }
     }
   )

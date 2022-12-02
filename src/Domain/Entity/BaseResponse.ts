@@ -1,5 +1,5 @@
 export interface IBaseResponse {
-  message: string;
+  message: string | string[];
   success: boolean;
   validationErrors: string[];
 }
