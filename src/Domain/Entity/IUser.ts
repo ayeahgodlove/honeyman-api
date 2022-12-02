@@ -28,4 +28,5 @@ export const emptyUser: IUser = {
 
 export interface IUserResponse extends IBaseResponse {
   data: IUser | null;
+  token?: string
 }

@@ -9,14 +9,13 @@ import bodyParser from "body-parser";
 
 import { errorHandler } from "./Middlewares/error.middleware";
 import { notFoundHandler } from "./Middlewares/not-found.middleware";
-import { checkJwt } from "./Middlewares/authz.middleware";
 import categoriesRouter from "./Routes/CategoryRoutes";
 import { connection } from "./Config/connection";
 import passport from "passport";
 import session from "express-session";
 import cookieParser from "cookie-parser";
-import { register } from "./Controller/UsersController";
-
+import { login, register } from "./Controller/UsersController";
+require("./Auth/Passport");
 dotenv.config();
 
 /**
@@ -41,6 +40,8 @@ app.use(
     extended: true,
   })
 );
+
+require("./Auth/Passport");
 
 app.use(helmet());
 app.use(
@@ -69,24 +70,32 @@ app.get("/api", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
+/**
+ * Users controllers
+ */
+ app.post("/api/register", register);
+ app.post("/api/login", login);
+
 // ✨ New! Mount authorization middleware
-app.get("/api/authorized", checkJwt, function (req, res) {
-  res.send({
-    message: "Secured Resource",
-    access_token: req.headers.authorization,
-  });
-});
+app.get(
+  "/api/authorized",
+  passport.authenticate("jwt", { session: false }),
+  function (req, res) {
+    res.send({
+      message: "Secured Resource",
+      access_token: req.headers.authorization,
+    });
+  }
+);
 
 /**
  * categories
  */
-app.use("/api/categories", categoriesRouter);
-
-/**
- * Users controllers
- */
-app.post("/api/register", register);
-
+app.use(
+  "/api/categories",
+  passport.authenticate("jwt", { session: false }),
+  categoriesRouter
+);
 
 // middleware interceptions
 app.use(errorHandler);

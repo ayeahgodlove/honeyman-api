@@ -2,8 +2,11 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 
 import passportJWT from "passport-jwt";
-import slugify from "slugify";
 import { User } from "../Repository/Models/User";
+import * as dotenv from "dotenv";
+import * as bcrypt from "bcrypt";
+
+dotenv.config();
 
 const ExtractJWT = passportJWT.ExtractJwt;
 const LocStrategy = LocalStrategy.Strategy;
@@ -11,18 +14,37 @@ const LocStrategy = LocalStrategy.Strategy;
 passport.use(
   new LocStrategy(
     {
-      usernameField: "Username",
-      passwordField: "Password",
+      usernameField: "username",
+      passwordField: "password",
     },
     async (username, password, callback) => {
       try {
-        const user = await User.findOne({ where: { username } });
+        const user: any = await User.findOne<User>({
+          where: { username: username },
+        });
+
 
         if (!user) {
-          return callback(null, false, { message: "User not found" });
+          return callback(null, false, { message: "User not found@" });
         }
 
-        return callback(null, user, { message: "Logged in Successfully" });
+        const { dataValues } = user;
+        const userPassword = dataValues.password;
+
+        const hashPassword = bcrypt.compare(
+          password,
+          userPassword,
+          (err, result) => {
+            if (err) throw err;
+            if (result === true) {
+              return callback(null, dataValues);
+            } else {
+              return callback(null, false, { message: "Incorrect password!" });
+            }
+          }
+        );
+
+        return callback(null, user, { message: "Logged in Successfully!" });
       } catch (error) {
         return callback(error);
       }
@@ -34,13 +56,15 @@ passport.use(
   new passportJWT.Strategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "honeymansecret",
+      secretOrKey: process.env.SECRET_KEY,
     },
     async (jwtPayload, callback) => {
       try {
-        const user = await User.findByPk<User>(jwtPayload._id);
+        const user: any = await User.findByPk<User>(jwtPayload.id);
+        // console.log("ps_user: ", jwtPayload)
         return callback(null, user!);
       } catch (error) {
+        console.log("ps_error: ", error)
         return callback(error);
       }
     }

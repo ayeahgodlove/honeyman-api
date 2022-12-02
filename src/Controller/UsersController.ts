@@ -5,7 +5,20 @@ import { uuid } from "uuidv4";
 import * as bcrypt from "bcrypt";
 import slugify from "slugify";
 import { User } from "../Repository/Models/User";
+import passport from "passport";
+import * as Jwt from "jsonwebtoken";
+import * as dotenv from "dotenv";
+require("../Auth/Passport");
 
+dotenv.config();
+
+const generateJWTToken = (user: IUser) => {
+  return Jwt.sign(user, `${process.env.SECRET_KEY}`, {
+    subject: user.username, // This is the username you’re encoding in the JWT
+    expiresIn: "7d", // This specifies that the token will expire in 7 days
+    algorithm: "HS256", // This is the algorithm used to “sign” or encode the values of the JWT
+  });
+};
 const register: RequestHandler = asyncHandler(
   async (req: Request, res: Response<IUserResponse>) => {
     const { password, username, email, address, fullname, role } = req.body;
@@ -24,9 +37,6 @@ const register: RequestHandler = asyncHandler(
         data: null,
       });
     }
-
-    console.log("Hello world...", req.body);
-
     // check if username, or email exist already
     const userExists = await User.findOne<User>({
       where: { email, username },
@@ -72,4 +82,33 @@ const register: RequestHandler = asyncHandler(
   }
 );
 
-export { register };
+const login: RequestHandler = asyncHandler(
+  async (req: Request, res: Response<IUserResponse>) => {
+    passport.authenticate("local", { session: false }, (error, user, info) => {
+      if (error || !user) {
+        return res.status(400).json({
+          message: `${info.message}`,
+          data: user,
+          validationErrors: [],
+          success: false,
+        });
+      }
+
+      req.login(user, { session: false }, (error) => {
+        if (error) {
+          res.send(error);
+        }
+        let token = generateJWTToken(user);
+        return res.status(200).json({
+          data: user,
+          success: true,
+          validationErrors: [],
+          token,
+          message: "Logged in Successfully!"
+        } as any);
+      });
+    })(req, res);
+  }
+);
+
+export { register, login };

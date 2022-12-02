@@ -32,10 +32,17 @@ export const sequelize = new Sequelize({
 });
 
 export const connection = async () => {
-  await sequelize
-    .sync({ force: true })
-    .then(() => console.log("Connection has been established successfully."))
-    .catch((error) =>
-      console.error("Unable to connect to the database:", error)
-    );
+  // await sequelize
+  //   .sync({ force: true })
+  //   .then(() => console.log("Connection has been established successfully."))
+  //   .catch((error) =>
+  //     console.error("Unable to connect to the database:", error)
+  //   );
+
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
 };
