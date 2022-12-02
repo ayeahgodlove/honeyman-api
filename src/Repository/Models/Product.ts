@@ -1,3 +1,4 @@
+import { sequelize } from "../../Config/connection";
 import {
   Table,
   Model,
@@ -15,9 +16,9 @@ import { SubCategory } from "./SubCategory";
 @Table({
   timestamps: true,
   paranoid: true,
-  modelName: "Product",
+  tableName: "Products",
 })
-export class Product extends Model<Product> {
+export class Product extends Model {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -91,3 +92,5 @@ export class Product extends Model<Product> {
   @BelongsToMany(() => Order, () => ProductOrder)
   orders!: Order[];
 }
+
+export const productRepository = sequelize.getRepository(Product);

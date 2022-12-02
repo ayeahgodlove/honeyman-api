@@ -1,3 +1,4 @@
+import { sequelize } from "../../Config/connection";
 import {
   Table,
   Model,
@@ -11,9 +12,9 @@ import { User } from "./User";
 @Table({
   timestamps: true,
   paranoid: true,
-  modelName: "Payment",
+  tableName: "Payments",
 })
-export class Payment extends Model<Payment> {
+export class Payment extends Model {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -62,3 +63,5 @@ export class Payment extends Model<Payment> {
   @BelongsTo(() => User)
   user!: User;
 }
+
+export const paymentRepository = sequelize.getRepository(Payment);
