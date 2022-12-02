@@ -1,6 +1,6 @@
 import { IBaseResponse } from "./BaseResponse";
 
-export interface Category {
+export interface ICategory {
   id: number;
   name: string;
   slug: string;
@@ -9,29 +9,27 @@ export interface Category {
   updatedAt: Date;
 }
 
-export interface SubCategory extends Category {
+export interface ISubCategory extends ICategory {
   categoryId: number;
 }
 
-export const emptyCategory: Category = {
+export const emptyCategory: ICategory = {
   id: 0,
   name: "",
   slug: "",
-  description: '',
+  description: "",
   createdAt: new Date(),
   updatedAt: new Date(),
 };
 
 export interface ICategoryResponse extends IBaseResponse {
-  data: Category;
+  data: ICategory;
 }
 
-
-export const emptySubCategory: SubCategory = {
+export const emptySubCategory: ISubCategory = {
   ...emptyCategory,
   categoryId: 0,
 };
 export interface ISubCategoryResponse extends IBaseResponse {
-  data: SubCategory;
+  data: ISubCategory;
 }
-

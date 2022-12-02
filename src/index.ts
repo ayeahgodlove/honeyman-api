@@ -10,9 +10,13 @@ import bodyParser from "body-parser";
 import { errorHandler } from "./Middlewares/error.middleware";
 import { notFoundHandler } from "./Middlewares/not-found.middleware";
 import { checkJwt } from "./Middlewares/authz.middleware";
-// import { MySQLConnection } from "./config/MySQLConfig";
 import categoriesRouter from "./Routes/CategoryRoutes";
-import { PgConnection } from "./Config/PgConfig";
+import { connection } from "./Config/connection";
+import passport from "passport";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import { register } from "./Controller/UsersController";
+
 dotenv.config();
 
 /**
@@ -39,12 +43,27 @@ app.use(
 );
 
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // initialize DB connection
 // MySQLConnection();
-PgConnection();
+connection();
 
 // app.use(jwtCheck); //donot authorize the whole application
 
@@ -63,7 +82,15 @@ app.get("/api/authorized", checkJwt, function (req, res) {
 });
 
 // routes
+/**
+ * categories
+ */
 app.use("/api/categories", categoriesRouter);
+
+/**
+ * Users controllers
+ */
+app.post("/api/register", register);
 // middleware interceptions
 app.use(errorHandler);
 app.use(notFoundHandler);

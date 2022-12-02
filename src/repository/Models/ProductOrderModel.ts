@@ -17,7 +17,7 @@ import { ProductModel } from "./ProductModel";
 })
 export class ProductOrderModel extends Model<ProductOrderModel> {
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     references: {
       model: ProductModel,
@@ -25,10 +25,10 @@ export class ProductOrderModel extends Model<ProductOrderModel> {
     },
   })
   @ForeignKey(() => ProductModel)
-  productId!: number;
+  productId!: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     references: {
       model: OrderModel,
@@ -36,7 +36,7 @@ export class ProductOrderModel extends Model<ProductOrderModel> {
     },
   })
   @ForeignKey(() => OrderModel)
-  orderId!: number;
+  orderId!: string;
 
   //   additional
   @Column({

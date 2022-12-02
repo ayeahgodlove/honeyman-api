@@ -1,8 +1,9 @@
 import { IBaseResponse } from "./BaseResponse";
 
-export interface User {
+export interface IUser {
   id: number;
   username: string;
+  slug: string;
   fullname: string;
   email: string;
   password: string;
@@ -12,9 +13,10 @@ export interface User {
   updatedAt: Date;
 }
 
-export const emptyUser: User = {
+export const emptyUser: IUser = {
   id: 0,
   username: "",
+  slug: "",
   fullname: "",
   email: "",
   password: "",
@@ -25,5 +27,5 @@ export const emptyUser: User = {
 };
 
 export interface IUserResponse extends IBaseResponse {
-  data: User;
+  data: IUser;
 }

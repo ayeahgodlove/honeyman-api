@@ -15,15 +15,15 @@ import { UserModel } from "./UserModel";
 })
 export class PaymentModel extends Model<PaymentModel> {
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   })
-  declare id?: number;
+  declare id?: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     references: {
       model: UserModel,
@@ -31,7 +31,7 @@ export class PaymentModel extends Model<PaymentModel> {
     },
   })
   @ForeignKey(() => UserModel)
-  userId!: number;
+  userId!: string;
 
   @Column({
     type: DataType.STRING(40),

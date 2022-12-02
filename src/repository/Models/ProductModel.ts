@@ -19,15 +19,15 @@ import { SubCategoryModel } from "./SubCategoryModel";
 })
 export class ProductModel extends Model<ProductModel> {
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   })
-  declare id?: number;
+  declare id?: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     references: {
       model: CategoryModel,
@@ -35,10 +35,10 @@ export class ProductModel extends Model<ProductModel> {
     },
   })
   @ForeignKey(() => CategoryModel)
-  categoryId!: number;
+  categoryId!: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     references: {
       model: SubCategoryModel,
@@ -46,7 +46,7 @@ export class ProductModel extends Model<ProductModel> {
     },
   })
   @ForeignKey(() => SubCategoryModel)
-  subCategoryId!: number;
+  subCategoryId!: string;
 
   @Column({
     type: DataType.STRING(128),

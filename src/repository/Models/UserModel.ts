@@ -12,12 +12,12 @@ import {
 })
 export class UserModel extends Model<UserModel> {
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   })
-  declare id?: number;
+  declare id?: string;
 
   @Column({
     type: DataType.STRING(128),

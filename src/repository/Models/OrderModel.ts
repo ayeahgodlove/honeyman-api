@@ -19,15 +19,15 @@ import { UserModel } from "./UserModel";
 })
 export class OrderModel extends Model<OrderModel> {
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   })
-  declare id?: number;
+  declare id?: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     references: {
       model: UserModel,
@@ -35,10 +35,10 @@ export class OrderModel extends Model<OrderModel> {
     },
   })
   @ForeignKey(() => UserModel)
-  userId!: number;
+  userId!: string;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.UUIDV4,
     allowNull: false,
     references: {
       model: ProductModel,
@@ -46,7 +46,7 @@ export class OrderModel extends Model<OrderModel> {
     },
   })
   @ForeignKey(() => ProductModel)
-  productId!: number;
+  productId!: string;
 
   @Column({
     type: DataType.FLOAT,
