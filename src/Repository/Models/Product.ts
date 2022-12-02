@@ -7,17 +7,17 @@ import {
   DataType,
   BelongsToMany
 } from "sequelize-typescript";
-import { CategoryModel } from "./CategoryModel";
-import { OrderModel } from "./OrderModel";
-import { ProductOrderModel } from "./ProductOrderModel";
-import { SubCategoryModel } from "./SubCategoryModel";
+import { Category } from "./Category";
+import { Order } from "./Order";
+import { ProductOrder } from "./ProductOrder";
+import { SubCategory } from "./SubCategory";
 
 @Table({
   timestamps: true,
   paranoid: true,
   modelName: "Product",
 })
-export class ProductModel extends Model<ProductModel> {
+export class Product extends Model<Product> {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -30,22 +30,22 @@ export class ProductModel extends Model<ProductModel> {
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: CategoryModel,
+      model: Category,
       key: "id",
     },
   })
-  @ForeignKey(() => CategoryModel)
+  @ForeignKey(() => Category)
   categoryId!: string;
 
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: SubCategoryModel,
+      model: SubCategory,
       key: "id",
     },
   })
-  @ForeignKey(() => SubCategoryModel)
+  @ForeignKey(() => SubCategory)
   subCategoryId!: string;
 
   @Column({
@@ -82,12 +82,12 @@ export class ProductModel extends Model<ProductModel> {
   })
   slug!: string;
 
-  @BelongsTo(() => CategoryModel)
-  category!: CategoryModel;
+  @BelongsTo(() => Category)
+  category!: Category;
 
-  @BelongsTo(() => SubCategoryModel)
-  subCategory!: SubCategoryModel;
+  @BelongsTo(() => SubCategory)
+  subCategory!: SubCategory;
 
-  @BelongsToMany(() => OrderModel, () => ProductOrderModel)
-  orders!: OrderModel[];
+  @BelongsToMany(() => Order, () => ProductOrder)
+  orders!: Order[];
 }

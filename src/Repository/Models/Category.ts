@@ -1,13 +1,13 @@
 import { Table, Model, Column, DataType, HasMany } from "sequelize-typescript";
-import { ProductModel } from "./ProductModel";
-import { SubCategoryModel } from "./SubCategoryModel";
+import { Product } from "./Product";
+import { SubCategory } from "./SubCategory";
 
 @Table({
   timestamps: true,
   paranoid: true,
   modelName: "Category",
 })
-export class CategoryModel extends Model<CategoryModel> {
+export class Category extends Model<Category> {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -41,9 +41,9 @@ export class CategoryModel extends Model<CategoryModel> {
    *  category: Car
    * subCategory: Suff, Rav4, Land Cruiser etc...
    */
-  @HasMany(() => SubCategoryModel)
-  subCategories!: SubCategoryModel[];
+  @HasMany(() => SubCategory)
+  subCategories!: SubCategory[];
 
-  @HasMany(() => ProductModel)
-  products!: ProductModel[];
+  @HasMany(() => Product)
+  products!: Product[];
 }

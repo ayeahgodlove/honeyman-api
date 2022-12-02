@@ -6,14 +6,14 @@ import {
   BelongsTo,
   DataType,
 } from "sequelize-typescript";
-import { UserModel } from "./UserModel";
+import { User } from "./User";
 
 @Table({
   timestamps: true,
   paranoid: true,
   modelName: "Payment",
 })
-export class PaymentModel extends Model<PaymentModel> {
+export class Payment extends Model<Payment> {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -26,11 +26,11 @@ export class PaymentModel extends Model<PaymentModel> {
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: UserModel,
+      model: User,
       key: "id",
     },
   })
-  @ForeignKey(() => UserModel)
+  @ForeignKey(() => User)
   userId!: string;
 
   @Column({
@@ -59,6 +59,6 @@ export class PaymentModel extends Model<PaymentModel> {
   })
   slug!: string;
 
-  @BelongsTo(() => UserModel)
-  user!: UserModel;
+  @BelongsTo(() => User)
+  user!: User;
 }

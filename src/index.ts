@@ -62,10 +62,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // initialize DB connection
-// MySQLConnection();
 connection();
-
-// app.use(jwtCheck); //donot authorize the whole application
 
 //routes
 app.get("/api", (req: Request, res: Response) => {
@@ -73,7 +70,6 @@ app.get("/api", (req: Request, res: Response) => {
 });
 
 // ✨ New! Mount authorization middleware
-// app.use(checkJwt);
 app.get("/api/authorized", checkJwt, function (req, res) {
   res.send({
     message: "Secured Resource",
@@ -81,7 +77,6 @@ app.get("/api/authorized", checkJwt, function (req, res) {
   });
 });
 
-// routes
 /**
  * categories
  */

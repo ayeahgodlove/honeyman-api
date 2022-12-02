@@ -7,35 +7,35 @@ import {
   DataType,
   BelongsToMany,
 } from "sequelize-typescript";
-import { OrderModel } from "./OrderModel";
-import { ProductModel } from "./ProductModel";
+import { Order } from "./Order";
+import { Product } from "./Product";
 
 @Table({
   timestamps: true,
   paranoid: true,
   modelName: "ProductOrder",
 })
-export class ProductOrderModel extends Model<ProductOrderModel> {
+export class ProductOrder extends Model<ProductOrder> {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: ProductModel,
+      model: Product,
       key: "id",
     },
   })
-  @ForeignKey(() => ProductModel)
+  @ForeignKey(() => Product)
   productId!: string;
 
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: OrderModel,
+      model: Order,
       key: "id",
     },
   })
-  @ForeignKey(() => OrderModel)
+  @ForeignKey(() => Order)
   orderId!: string;
 
   //   additional
@@ -52,9 +52,9 @@ export class ProductOrderModel extends Model<ProductOrderModel> {
   quantity!: number;
 
   //   relationships
-  @BelongsTo(() => ProductModel)
-  product!: ProductModel;
+  @BelongsTo(() => Product)
+  product!: Product;
 
-  @BelongsTo(() => OrderModel)
-  order!: OrderModel;
+  @BelongsTo(() => Order)
+  order!: Order;
 }

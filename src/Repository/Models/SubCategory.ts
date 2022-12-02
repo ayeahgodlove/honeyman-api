@@ -7,15 +7,15 @@ import {
   DataType,
   HasMany,
 } from "sequelize-typescript";
-import { CategoryModel } from "./CategoryModel";
-import { ProductModel } from "./ProductModel";
+import { Category } from "./Category";
+import { Product } from "./Product";
 
 @Table({
   timestamps: true,
   paranoid: true,
   modelName: "SubCategory",
 })
-export class SubCategoryModel extends Model<SubCategoryModel> {
+export class SubCategory extends Model<SubCategory> {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -28,11 +28,11 @@ export class SubCategoryModel extends Model<SubCategoryModel> {
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: CategoryModel,
+      model: Category,
       key: "id",
     },
   })
-  @ForeignKey(() => CategoryModel)
+  @ForeignKey(() => Category)
   categoryId!: string;
 
   @Column({
@@ -58,9 +58,9 @@ export class SubCategoryModel extends Model<SubCategoryModel> {
   /**
    * Rav4 => Cars (belongs to)
    */
-  @BelongsTo(() => CategoryModel)
-  category!: CategoryModel;
+  @BelongsTo(() => Category)
+  category!: Category;
 
-  @HasMany(() => ProductModel)
-  products!: ProductModel[];
+  @HasMany(() => Product)
+  products!: Product[];
 }

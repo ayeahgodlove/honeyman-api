@@ -8,16 +8,16 @@ import {
   BelongsToMany,
   HasMany
 } from "sequelize-typescript";
-import { ProductModel } from "./ProductModel";
-import { ProductOrderModel } from "./ProductOrderModel";
-import { UserModel } from "./UserModel";
+import { Product } from "./Product";
+import { ProductOrder } from "./ProductOrder";
+import { User } from "./User";
 
 @Table({
   timestamps: true,
   paranoid: true,
   modelName: "Order",
 })
-export class OrderModel extends Model<OrderModel> {
+export class Order extends Model<Order> {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -30,22 +30,22 @@ export class OrderModel extends Model<OrderModel> {
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: UserModel,
+      model: User,
       key: "id",
     },
   })
-  @ForeignKey(() => UserModel)
+  @ForeignKey(() => User)
   userId!: string;
 
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
     references: {
-      model: ProductModel,
+      model: Product,
       key: "id",
     },
   })
-  @ForeignKey(() => ProductModel)
+  @ForeignKey(() => Product)
   productId!: string;
 
   @Column({
@@ -86,9 +86,9 @@ export class OrderModel extends Model<OrderModel> {
   })
   slug!: string;
 
-  @BelongsTo(() => UserModel)
-  user!: UserModel;
+  @BelongsTo(() => User)
+  user!: User;
 
-  @HasMany(() => ProductModel)
-  products!: ProductModel[]
+  @HasMany(() => Product)
+  products!: Product[]
 }

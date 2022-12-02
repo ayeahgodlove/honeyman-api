@@ -4,12 +4,12 @@
  * Sequelize with MySQL
  */
 
-import { CategoryModel } from "../Repository/Models/CategoryModel";
-import { OrderModel } from "../Repository/Models/OrderModel";
-import { PaymentModel } from "../Repository/Models/PaymentModel";
-import { ProductModel } from "../Repository/Models/ProductModel";
-import { SubCategoryModel } from "../Repository/Models/SubCategoryModel";
-import { UserModel } from "../Repository/Models/UserModel";
+import { Category } from "../Repository/Models/Category";
+import { Order } from "../Repository/Models/Order";
+import { Payment } from "../Repository/Models/Payment";
+import { Product } from "../Repository/Models/Product";
+import { SubCategory } from "../Repository/Models/SubCategory";
+import { User } from "../Repository/Models/User";
 import { Sequelize } from "sequelize-typescript";
 
 export const sequelize = new Sequelize({
@@ -20,14 +20,7 @@ export const sequelize = new Sequelize({
   host: "localhost",
   dialect: "postgres",
   repositoryMode: true,
-  models: [
-    SubCategoryModel,
-    CategoryModel,
-    UserModel,
-    ProductModel,
-    OrderModel,
-    PaymentModel,
-  ],
+  models: [SubCategory, Category, User, Product, Order, Payment],
   logging: true,
   pool: {
     max: 5,
@@ -38,7 +31,8 @@ export const sequelize = new Sequelize({
 });
 
 export const connection = async () => {
-  await sequelize.sync()
+  await sequelize
+    .sync()
     .then(() => console.log("Connection has been established successfully."))
     .catch((error) =>
       console.error("Unable to connect to the database:", error)

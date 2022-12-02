@@ -6,7 +6,7 @@ import {
   ICategoryResponse,
 } from "../Domain/Entity/ICategory";
 import slugify from "slugify";
-import { CategoryModel } from "../Repository/Models/CategoryModel";
+import { CategoryModel } from "../Repository/Models/Category";
 
 const getCategories: RequestHandler = asyncHandler(async (req, res) => {
   const categories = await CategoryModel.findAll();

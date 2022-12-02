@@ -1,16 +1,11 @@
-import {
-  Table,
-  Model,
-  Column,
-  DataType
-} from "sequelize-typescript";
+import { Table, Model, Column, DataType } from "sequelize-typescript";
 
 @Table({
   timestamps: true,
   paranoid: true,
   modelName: "User",
 })
-export class UserModel extends Model<UserModel> {
+export class User extends Model<User> {
   @Column({
     type: DataType.UUIDV4,
     allowNull: false,
@@ -22,28 +17,28 @@ export class UserModel extends Model<UserModel> {
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
-    unique: true
+    unique: true,
   })
   username!: string;
 
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
-    unique: true
+    unique: true,
   })
   fullname!: string;
 
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
-    unique: true
+    unique: true,
   })
   email!: string;
 
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
-    unique: true
+    unique: true,
   })
   password!: string;
 
@@ -58,11 +53,11 @@ export class UserModel extends Model<UserModel> {
     allowNull: false,
   })
   role!: string;
-  
+
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
-    unique: true
+    unique: true,
   })
   slug!: string;
 }
