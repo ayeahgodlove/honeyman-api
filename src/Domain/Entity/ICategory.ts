@@ -1,7 +1,7 @@
 import { IBaseResponse } from "./BaseResponse";
 
 export interface ICategory {
-  id: number;
+  id: string;
   name: string;
   slug: string;
   description: string;
@@ -14,7 +14,7 @@ export interface ISubCategory extends ICategory {
 }
 
 export const emptyCategory: ICategory = {
-  id: 0,
+  id: "",
   name: "",
   slug: "",
   description: "",
@@ -23,7 +23,7 @@ export const emptyCategory: ICategory = {
 };
 
 export interface ICategoryResponse extends IBaseResponse {
-  data: ICategory;
+  data: ICategory | null;
 }
 
 export const emptySubCategory: ISubCategory = {
