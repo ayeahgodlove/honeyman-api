@@ -31,5 +31,5 @@ export const emptySubCategory: ISubCategory = {
   categoryId: 0,
 };
 export interface ISubCategoryResponse extends IBaseResponse {
-  data: ISubCategory;
+  data: ISubCategory | null;
 }

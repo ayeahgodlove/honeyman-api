@@ -15,6 +15,7 @@ import passport from "passport";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import { login, register } from "./Controller/UsersController";
+import subCategoriesRouter from "./Routes/SubCategoryRoutes";
 require("./Auth/Passport");
 dotenv.config();
 
@@ -73,8 +74,8 @@ app.get("/api", (req: Request, res: Response) => {
 /**
  * Users controllers
  */
- app.post("/api/register", register);
- app.post("/api/login", login);
+app.post("/api/register", register);
+app.post("/api/login", login);
 
 // ✨ New! Mount authorization middleware
 app.get(
@@ -95,6 +96,12 @@ app.use(
   "/api/categories",
   passport.authenticate("jwt", { session: false }),
   categoriesRouter
+);
+
+app.use(
+  "/api/sub-categories",
+  passport.authenticate("jwt", { session: false }),
+  subCategoriesRouter
 );
 
 // middleware interceptions
