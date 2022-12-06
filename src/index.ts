@@ -16,6 +16,8 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import { login, register } from "./Controller/UsersController";
 import subCategoriesRouter from "./Routes/SubCategoryRoutes";
+import productsRouter from "./Routes/ProductRoutes";
+import ordersRoutes from "./Routes/OrderRoutes";
 require("./Auth/Passport");
 dotenv.config();
 
@@ -90,7 +92,7 @@ app.get(
 );
 
 /**
- * categories
+ * categories and subcategories
  */
 app.use(
   "/api/categories",
@@ -104,6 +106,32 @@ app.use(
   subCategoriesRouter
 );
 
+/**
+ * products
+ */
+app.use(
+  "/api/products",
+  passport.authenticate("jwt", { session: false }),
+  productsRouter
+);
+
+/**
+ * Order
+ */
+app.use(
+  "/api/orders",
+  passport.authenticate("jwt", { session: false }),
+  ordersRoutes
+);
+
+/**
+ * Payments
+ */
+app.use(
+  "/api/payments",
+  passport.authenticate("jwt", { session: false }),
+  ordersRoutes
+);
 // middleware interceptions
 app.use(errorHandler);
 app.use(notFoundHandler);

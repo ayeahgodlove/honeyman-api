@@ -1,29 +1,31 @@
 import { IBaseResponse } from "./BaseResponse";
 
 export interface IOrder {
-  id: number;
-  userId: number;
-  productId: number;
+  id: string;
+  userId: string;
+  productId: string;
   unitPrice: number;
   total: number;
   status: string;
   orderNo: string;
   createdAt: Date;
   updatedAt: Date;
+  slug: string;
 }
 
 export const emptyOrder: IOrder = {
-  id: 0,
-  userId: 0,
-  productId: 0,
+  id: "",
+  userId: "",
+  productId: "",
   unitPrice: 0,
   total: 0,
   status: "",
   orderNo: "",
   createdAt: new Date(),
   updatedAt: new Date(),
+  slug: "",
 };
 
 export interface IOrderResponse extends IBaseResponse {
-  data: IOrder;
+  data: IOrder | null;
 }

@@ -109,13 +109,12 @@ const updateCategory: RequestHandler = asyncHandler(
 const deleteCategory: RequestHandler = asyncHandler(
   async (req: Request, res: Response) => {
     try {
-      const { name, description, updatedAt } = req.body;
       const { id } = req.params;
 
       const categoryItem = await Category.findByPk(id);
       if (categoryItem === null) {
         res.status(400).send({
-          message: `(${name}) not found!`,
+          message: `Category not found!`,
           validationErrors: [],
           success: false,
           data: null,
@@ -125,7 +124,7 @@ const deleteCategory: RequestHandler = asyncHandler(
           force: true,
         });
         res.status(200).json({
-          message: `${name} deleted successfully!`,
+          message: `Category deleted successfully!`,
           success: true,
           validationErrors: [],
           data: categoryItem,

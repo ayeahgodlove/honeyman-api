@@ -1,29 +1,31 @@
 import { IBaseResponse } from "./BaseResponse";
 
 export interface IProduct {
-  id: number;
+  id: string;
   name: string;
-  price: string;
+  price: number;
   description: string;
-  categoryId: number;
-  subCategoryId: number;
+  categoryId: string;
+  subCategoryId: string;
   imagePath: string;
   createdAt: Date;
   updatedAt: Date;
+  slug: string;
 }
 
 export const emptyProduct: IProduct = {
-  id: 0,
+  id: "",
   name: "",
-  price: "",
+  price: 0,
   description: "",
-  categoryId: 0,
-  subCategoryId: 0,
+  categoryId: "",
+  subCategoryId: "",
   imagePath: "",
   createdAt: new Date(),
   updatedAt: new Date(),
+  slug:""
 };
 
 export interface IProductResponse extends IBaseResponse {
-  data: IProduct;
+  data: IProduct | null;
 }

@@ -8,6 +8,7 @@ export interface IPayment {
   status: string;
   createdAt: Date;
   updatedAt: Date;
+  slug: string;
 }
 
 export const emptyPayment: IPayment = {
@@ -18,8 +19,9 @@ export const emptyPayment: IPayment = {
   status: "",
   createdAt: new Date(),
   updatedAt: new Date(),
+  slug: ""
 };
 
 export interface IPaymentResponse extends IBaseResponse {
-  data: IPayment;
+  data: IPayment | null;
 }
