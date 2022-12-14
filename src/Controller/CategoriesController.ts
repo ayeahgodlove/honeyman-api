@@ -8,6 +8,7 @@ import {
 import slugify from "slugify";
 import { Category } from "../Repository/Models/Category";
 import { uuid } from "uuidv4";
+
 const getCategories: RequestHandler = asyncHandler(
   async (req: Request, res: Response) => {
     const categories = await Category.findAll();

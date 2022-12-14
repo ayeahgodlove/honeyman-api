@@ -18,6 +18,7 @@ import { login, register } from "./Controller/UsersController";
 import subCategoriesRouter from "./Routes/SubCategoryRoutes";
 import productsRouter from "./Routes/ProductRoutes";
 import ordersRoutes from "./Routes/OrderRoutes";
+import processPayments from "./Routes/ProcessPayments";
 require("./Auth/Passport");
 dotenv.config();
 
@@ -131,6 +132,15 @@ app.use(
   "/api/payments",
   passport.authenticate("jwt", { session: false }),
   ordersRoutes
+);
+
+/**
+ * process payments
+ */
+app.use(
+  "/api/process-payments",
+  passport.authenticate("jwt", { session: false }),
+  processPayments
 );
 // middleware interceptions
 app.use(errorHandler);
