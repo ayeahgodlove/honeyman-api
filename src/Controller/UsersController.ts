@@ -86,8 +86,8 @@ const login: RequestHandler = asyncHandler(
   async (req: Request, res: Response<IUserResponse>) => {
     passport.authenticate("local", { session: false }, (error, user, info) => {
       if (error || !user) {
-        return res.status(400).json({
-          message: `${info.message}`,
+        res.status(500).send({
+          message: `${error}`,
           data: user,
           validationErrors: [],
           success: false,
@@ -95,17 +95,26 @@ const login: RequestHandler = asyncHandler(
       }
 
       req.login(user, { session: false }, (error) => {
-        if (error) {
-          res.send(error);
+        try {
+          if (error) {
+            res.status(500).send({
+              message: `${error}`,
+              data: user,
+              validationErrors: [],
+              success: false,
+            });
+          }
+          let token = generateJWTToken(user);
+          res.status(200).json({
+            data: user,
+            success: true,
+            validationErrors: [],
+            token,
+            message: "Logged in Successfully!",
+          } as any);
+        } catch (error) {
+
         }
-        let token = generateJWTToken(user);
-        return res.status(200).json({
-          data: user,
-          success: true,
-          validationErrors: [],
-          token,
-          message: "Logged in Successfully!"
-        } as any);
       });
     })(req, res);
   }
