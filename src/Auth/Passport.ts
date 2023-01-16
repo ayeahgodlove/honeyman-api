@@ -2,6 +2,8 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 
 import passportJWT from "passport-jwt";
+import GoogleStrategy from "passport-google-oidc";
+
 import { User } from "../Repository/Models/User";
 import * as dotenv from "dotenv";
 import * as bcrypt from "bcrypt";
@@ -22,7 +24,6 @@ passport.use(
         const user: any = await User.findOne<User>({
           where: { username: username },
         });
-
 
         if (!user) {
           return callback(null, false, { message: "User not found@" });
@@ -64,9 +65,20 @@ passport.use(
         // console.log("ps_user: ", jwtPayload)
         return callback(null, user!);
       } catch (error) {
-        console.log("ps_error: ", error)
+        console.log("ps_error: ", error);
         return callback(error);
       }
     }
   )
 );
+
+// google and social media platforms
+// passport.use(
+//   new GoogleStrategy({
+//     clientID: process.env["GOOGLE_CLIENT_ID"],
+//     clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
+//     callbackURL: "https://www.example.com/oauth2/redirect",
+//   }, async (issuer: any, profile: any, cb: any) => {
+
+//   })
+// );

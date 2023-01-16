@@ -1,0 +1,8 @@
+The TDD process can generally be divided into six steps:
+
+(Re-)Write a test
+Test fails
+Implement a fix
+Test passes
+Clean up code
+Repeat
