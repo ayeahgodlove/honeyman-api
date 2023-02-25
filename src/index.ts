@@ -70,7 +70,7 @@ connection();
 
 //routes
 app.get("/api", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+  res.status(200).send("Express + TypeScript Server");
 });
 
 /**
@@ -151,3 +151,5 @@ app.use(notFoundHandler);
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Listening on port ${PORT}`);
 });
+
+module.exports = app; // for testing

@@ -1,5 +1,12 @@
+import request from "supertest";
+import http, { Server } from "http";
+
+import * as app from "../../index";
+let server: Server<any, any> = http.createServer(app);
+
+
 describe("Server checks", function(){
-    it("Server is creaded without error", function() {
-        console.log("hi");
+    it("Server runs successfully!", function(done) {
+        request(server).get("/api").expect(200, done());
     });
 });

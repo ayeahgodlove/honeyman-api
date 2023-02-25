@@ -2,7 +2,7 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 
 import passportJWT from "passport-jwt";
-import GoogleStrategy from "passport-google-oidc";
+// import GoogleStrategy from "passport-google-oidc";
 
 import { User } from "../Repository/Models/User";
 import * as dotenv from "dotenv";
